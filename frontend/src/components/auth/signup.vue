@@ -1,9 +1,14 @@
 <template>
     <the-header></the-header>
+    <router-link to="/groupomania/users/login">Already one of us ? Sign in</router-link>
     <form @submit.prevent="register">
     <div class="form-control">
       <label for="username">Username</label>
       <input type="text" id="usename" v-model.trim="username" />
+    </div>
+    <div class="form-control">
+      <label for="ProfilePicture">Profile Picture</label>
+      <input type="text" id="ProfilePicture" v-model.trim="ProfilePicture" />
     </div>
     <div class="form-control">
       <label for="message">Email</label>
@@ -31,6 +36,7 @@ export default {
             username: '',
             email: '',
             password: '',
+            ProfilePicture: '',
             formIsValid: true
         }
     }, 
@@ -40,6 +46,7 @@ export default {
                 if (
                     this.email === '' ||
                     this.username === '' ||
+                    this.ProfilePicture === '' ||
                     !this.email.includes('@') ||
                     this.password === ''
                 ) {
@@ -57,7 +64,8 @@ export default {
                 body: JSON.stringify({
                     username: this.username,
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    ProfilePicture: this.ProfilePicture
                 })
                 })
                 .then( (response) => {

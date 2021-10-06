@@ -1,14 +1,16 @@
 <template>
 <the-header></the-header>
     <h1>all Posts</h1>
-    <post
-        v-for="po in posts"
-        :key="po.id"
-        :title="po.title"
-        :img="po.img"
-        :text="po.text"
-        :date="po.date"
-        :username="po.username"></post>
+    <ul>
+        <post
+            v-for="po in posts"
+            :key="po.id"
+            :title="po.title"
+            :img="po.img"
+            :text="po.text"
+            :date="po.date"
+            :username="po.username"></post>
+    </ul>
 
         <router-link to="/groupomania/users/login">login</router-link>
         <router-link id="newpost" to="/groupomania/posts/new">Create new Post</router-link>
@@ -51,7 +53,7 @@ export default {
                         id: id, 
                         username: data[id].from_user, 
                         title: data[id].title,
-                        date: data[id].date,
+                        date: data[id].date.slice(0, 19).replace('T', ' '),
                         text: data[id].text,
                         img: data[id].img})
                 }
@@ -68,6 +70,7 @@ export default {
         }
     },
     mounted() {
+        console.log('mounted');
         this.loadData()
     }
 }

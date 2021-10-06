@@ -1,5 +1,6 @@
 <template>
     <the-header></the-header>
+        <router-link to="/groupomania/users/signup">No account yet ? Join Us</router-link>
     <form @submit.prevent="register">
         <div class="form-control">
             <label for="message">Email</label>
@@ -51,7 +52,6 @@ export default {
                     password: this.password
                 })
             }).then( (response) => {
-
                     return response.json()
                 }
             ).then( (response) => {
@@ -59,8 +59,8 @@ export default {
                 console.log(response.user);
                 localStorage.setItem('Token-Frontend-Login', response.Usertoken)
                 localStorage.setItem('userLoggedIn', JSON.stringify(response.user))
+                this.$router.push('/groupomania/posts')
             })
-            this.$router.push('/groupomania/posts')
 
         }
     }
@@ -113,4 +113,5 @@ textarea:focus {
 .actions {
   text-align: center;
 }
+
 </style>

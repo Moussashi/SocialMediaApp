@@ -3,7 +3,7 @@
         <img src="../../assets/groupo.png">
         <ul>
             <router-link to="/groupomania/posts">Posts</router-link>
-            <router-link to="/groupomania/users/:id">Profil</router-link>
+            <router-link to="/groupomania/users/:id"> <fa icon="user"/></router-link>
         </ul>
     </header>
 </template>
@@ -40,5 +40,8 @@ a:hover {
 img {
     width: 30%;
     height: 15%;
+}
+.fa {
+    font-size: 1.5rem;
 }
 </style>

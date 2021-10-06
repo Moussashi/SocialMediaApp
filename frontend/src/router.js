@@ -4,7 +4,6 @@ import Login from './components/auth/Login.vue'
 import allPosts from './components/Posts/allPosts.vue'
 import singlePost from './components/Posts/singlePost.vue'
 import UserPage from './components/User/UserPage.vue'
-import Users from './components/User/Users.vue'
 import newPost from './components/Posts/newPost.vue'
 
 
@@ -17,7 +16,6 @@ const router = createRouter({
         {path: '/groupomania/posts', component: allPosts},
         {path: '/groupomania/posts/new', component: newPost},
         {path: '/groupomania/posts/:id', props: true, component: singlePost},
-        {path: '/groupomania/users', component: Users},
         {path: '/groupomania/users/:id', component: UserPage},
         {path: '/:notFound(.*)', component: null},
     ]

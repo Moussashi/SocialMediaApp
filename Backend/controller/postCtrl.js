@@ -1,4 +1,6 @@
 const mysql = require('mysql')
+const moment = require('moment')
+const { format } = require('./config')
 
 
 
@@ -77,12 +79,23 @@ const getOnePost = (req, res) => {
  // CREATE ONE POST
 
  const createPost = (req, res) => {
-     console.log('one');
 
     pool.getConnection((err, connection) => {
         console.log('connected create post');
+        const postdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        //const postdate = moment().format('YYYY-MM-DD hh:mm:ss')
 
-        const params = req.body
+        
+        const params = {
+            id_user: req.body.id_user,
+            from_user: req.body.from_user,
+            title: req.body.title,
+            img: req.body.img,
+            text: req.body.text,
+            date: postdate
+        } //date
+
+        console.log(params);
 
         //query
         connection.query('INSERT INTO posts SET ?', params , (err, rows) => {

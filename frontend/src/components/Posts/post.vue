@@ -5,15 +5,18 @@
             <img :src="img">
             <p>{{ text }}  </p>
             <p id="date"> created by {{ username }} {{ date }} </p>
+            <like></like>
         </li>
     </post-card>
 </template>
 
 <script>
 import PostCard from '../UI/PostCard.vue'
+import Like from '../Posts/like.vue'
 export default {
     components: {
         PostCard,
+        Like
     },
     props: {
         title: {

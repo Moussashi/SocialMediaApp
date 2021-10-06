@@ -1,6 +1,6 @@
 <template>
     <the-header></the-header>
-    <form @submit.prevent="register()">
+    <form @submit.prevent="register">
     <div class="form-control">
       <label for="title">Title</label>
       <input type="text" id="title" v-model.trim="title" />
@@ -29,7 +29,7 @@
      }, 
       data() {
          return {
-             date: new Date().toLocaleString(),
+             date: '',
              title: '',
              img: '',
              text: '',
@@ -47,21 +47,18 @@
                 },
 
                 body: JSON.stringify({
-                    id_user: "8",
+                    id_user: this.user.id,
                     from_user: this.user.username,
                     title: this.title,
                     img: this.img,
                     text: this.text,
-                    date: this.date
                 })
                 })
                 .then( (response) => {
                     console.log(response);
-                    console.log(this.user);
+                    this.$router.replace('/groupomania/posts')
                 }
             );
-             this.$router.replace('/groupomania/posts')
-
         },
         getUser() {
           this.user = JSON.parse(localStorage.getItem('userLoggedIn'))
