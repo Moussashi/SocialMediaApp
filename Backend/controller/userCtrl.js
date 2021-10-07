@@ -109,7 +109,6 @@ const getAllUsers = async (req, res) => {
      pool.getConnection((err, connection) => {
         if (err) throw err
         console.log('connected delete User');
-        console.log(req.body.id);
 
         //query
         connection.query('DELETE from user WHERE id = ?', [req.body.id], (err, rows) => {

@@ -1,10 +1,14 @@
 import { createStore } from 'vuex'
-import posts from './posts/posts.js'
 
 
 const store = createStore({
-    modules: {
-        posts: posts,
+    state() {
+        return {
+            users: []
+        }
+    },
+    mutations: {
+        
     }
 })
 

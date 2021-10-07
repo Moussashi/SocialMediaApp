@@ -62,13 +62,15 @@ const getOnePost = (req, res) => {
         console.log('connected');
 
         //query
-        connection.query('DELETE from posts WHERE id = ?', [req.body.id], (err, rows) => {
+        connection.query('DELETE from posts WHERE id = ?', [req.params.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
-                res.send(`post with id: ${[req.body.id]} has been deleted`)
+                res.send(`post with id: ${[req.params.id]} has been deleted`)
             } else {
-                
+                res.json({
+                    message: 'error in delete'
+                })
             }
         })
     })

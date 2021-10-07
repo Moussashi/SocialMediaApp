@@ -16,6 +16,7 @@ const getComments = async (req, res) => {
      pool.getConnection( async (err, connection) => {
         if (err) throw err
         console.log('connected');
+
         //query
         connection.query('SELECT * from comments', (err, rows) => {
             connection.release() // return the connection pool
@@ -42,7 +43,8 @@ const getOneComment = (req, res) => {
         console.log('connected');
 
         //query
-        connection.query('SELECT * from comments INNER JOIN user WHERE id_post = ? AND user.id = comments.id_user', [req.params.id], (err, rows) => {
+        connection.query(`
+            SELECT DISTINCT c.id, c.text, c.date_comment, c.id_user, u.username from comments c , user u INNER JOIN user WHERE c.id_post = ? AND u.id = c.id_user`, [req.params.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
@@ -59,16 +61,17 @@ const getOneComment = (req, res) => {
 
      pool.getConnection((err, connection) => {
         if (err) throw err
-        console.log('connected');
+        console.log('connected delete comment');
 
-        //query
-        connection.query('DELETE from comments WHERE id = ?', [req.body.id], (err, rows) => {
+        connection.query('DELETE from comments WHERE id = ?', [req.params.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
-                res.send(`comment with id: ${[req.body.id]} has been deleted`)
+                res.send(`post with id: ${[req.params.id]} has been deleted`)
             } else {
-                
+                res.json({
+                    message: 'error in delete'
+                })
             }
         })
     })

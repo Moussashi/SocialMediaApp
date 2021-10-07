@@ -95,7 +95,7 @@ export default {
         },
         deletePost() {
             const id = this.id
-
+            //Params
             fetch('http://localhost:3000/groupomania/users', {
                 method: 'DELETE',
                 headers: {
@@ -113,9 +113,9 @@ export default {
         
     },
     mounted() {
-        this.redirect()
         this.userInfo()
         this.fetchRecentPosts()
+        this.redirect()
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <the-header></the-header>
-    <form @submit.prevent="register">
+    <form @submit.prevent="newPost">
     <div class="form-control">
       <label for="title">Title</label>
       <input type="text" id="title" v-model.trim="title" />
@@ -37,7 +37,7 @@
          }
      },
      methods: {
-         register() {
+         sendPost() {
             fetch("http://localhost:3000/groupomania/posts", {
                 method: "POST",
                 headers: {

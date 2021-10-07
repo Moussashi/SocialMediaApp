@@ -8,6 +8,6 @@ router.get('/:id', getOneComment);
 
 router.post('/', createComment);
 
-router.delete('/', deleteComment)
+router.delete('/:id', deleteComment)
 
 module.exports = router;

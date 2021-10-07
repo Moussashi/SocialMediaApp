@@ -11,11 +11,11 @@
             :text="po.text"
             :date="po.date"
             :username="po.username"
+            @deletedComment="loadComments"
         >
         <!-- <input type="text" placeholder="add new comment" v-model=""> -->
         </post>
     </ul>
-        <router-link to="/groupomania/users/login">login</router-link>
         <router-link id="newpost" to="/groupomania/posts/new">Create new Post</router-link>
         <router-link id="logOut" to="/groupomania/users/login" @click="LogOut">Log Out</router-link>
 
@@ -73,11 +73,11 @@ export default {
                 for (let i = results.length - 1; i >= 0; i--) {
                     this.posts.push(results[i])
                 }
-                console.log(this.posts);
             })
 
         },
         async loadComments() {
+            console.log('loading comments');
 
             const myHeaders = new Headers();
             const token = localStorage.getItem('Token-Frontend-Login')
@@ -105,7 +105,6 @@ export default {
                         this.comments.push(results[i])
                 }
 
-                console.log(this.comments);
             })
 
         },
@@ -114,10 +113,9 @@ export default {
         }
     },
     mounted() {
-        console.log('mounted');
-        this.redirect()
         this.loadData()
         this.loadComments()
+        this.redirect()
     }
 }
 </script>

@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
 const commentRoute = require('./routes/commentRoute')
-const mysql = require('mysql')
 require('dotenv').config
 
 
