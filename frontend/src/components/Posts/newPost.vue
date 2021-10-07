@@ -38,7 +38,6 @@
      },
      methods: {
          register() {
-
             fetch("http://localhost:3000/groupomania/posts", {
                 method: "POST",
                 headers: {

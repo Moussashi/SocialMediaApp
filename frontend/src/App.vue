@@ -6,6 +6,17 @@
 export default {
   name: 'App',
   components: {
+
+  },
+  methods: {
+    redirect() {
+      if (window.location.pathname != '/groupomania/users/login' && !localStorage.getItem('userLoggedIn')) {
+        window.location = '/groupomania/users/login'
+      }
+    }
+  },
+  mounted() {
+    this.redirect()
   }
 }
 </script>

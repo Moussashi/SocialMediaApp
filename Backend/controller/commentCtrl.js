@@ -11,13 +11,13 @@ const pool = mysql.createPool({
     database: 'p7'
 })
 
-// GET ALL POSTS
-const getPosts = async (req, res) => {
+// GET ALL COMMENTS
+const getComments = async (req, res) => {
      pool.getConnection( async (err, connection) => {
         if (err) throw err
         console.log('connected');
         //query
-        connection.query('SELECT * from posts', (err, rows) => {
+        connection.query('SELECT * from comments', (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
@@ -33,16 +33,16 @@ const getPosts = async (req, res) => {
 
 }
 
-// GET ONE POST
+// GET ONE COMMENT
 
-const getOnePost = (req, res) => {
+const getOneComment = (req, res) => {
 
     pool.getConnection((err, connection) => {
         if (err) throw err
         console.log('connected');
 
         //query
-        connection.query('SELECT * from posts WHERE id = ?', [req.params.id], (err, rows) => {
+        connection.query('SELECT * from comments INNER JOIN user WHERE id_post = ? AND user.id = comments.id_user', [req.params.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
@@ -54,19 +54,19 @@ const getOnePost = (req, res) => {
     })
 }
 
-// DELETE ONE POST
- const deletePost = (req, res) => {
+// DELETE ONE Comment
+ const deleteComment = (req, res) => {
 
      pool.getConnection((err, connection) => {
         if (err) throw err
         console.log('connected');
 
         //query
-        connection.query('DELETE from posts WHERE id = ?', [req.body.id], (err, rows) => {
+        connection.query('DELETE from comments WHERE id = ?', [req.body.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
-                res.send(`post with id: ${[req.body.id]} has been deleted`)
+                res.send(`comment with id: ${[req.body.id]} has been deleted`)
             } else {
                 
             }
@@ -74,32 +74,29 @@ const getOnePost = (req, res) => {
     })
  }
 
- // CREATE ONE POST
-
- const createPost = (req, res) => {
+ // Create Comment
+  const createComment = (req, res) => {
 
     pool.getConnection((err, connection) => {
-        console.log('connected create post');
-        const postdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        console.log('connected create comment');
+        const commentdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         
         const params = {
             id_user: req.body.id_user,
-            from_user: req.body.from_user,
-            title: req.body.title,
-            img: req.body.img,
+            id_post: req.body.id_post,
             text: req.body.text,
-            date: postdate
+            date_comment: commentdate
         } //date
 
         console.log(params);
 
         //query
-        connection.query('INSERT INTO posts SET ?', params , (err, rows) => {
+        connection.query('INSERT INTO comments SET ?', params , (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
-                res.send(`new post with title: ${params.title} has been added`)
+                res.send(`new comment has been added`)
             } else {
                 res.json({
                     message: 'Problem with create'
@@ -109,30 +106,9 @@ const getOnePost = (req, res) => {
     })
  }
 
- // MODIFY POST
-
- const updatePost = (req, res) => {
-      pool.getConnection((err, connection) => {
-        if (err) throw err
-
-        const { id, title, img } = req.body
-
-        //query
-        connection.query('UPDATE posts SET title = ? WHERE id = ?', [title, id, img] , (err, rows) => {
-            connection.release() // return the connection pool
-
-            if (!err) {
-                res.send(`post with title: ${title} has been modified`)
-            } else {
-                
-            }
-        })
-    })
+ module.exports = {
+     getComments,
+     deleteComment,
+     createComment,
+     getOneComment
  }
-module.exports = {
-    getPosts,
-    getOnePost,
-    deletePost,
-    createPost, 
-    updatePost
-}

@@ -46,6 +46,11 @@ export default {
         }
     },
     methods: {
+        redirect() {
+            if (window.location.pathname != '/groupomania/users/login' && !localStorage.getItem('userLoggedIn')) {
+                window.location = '/groupomania/users/login'
+            }
+        },
         userInfo() {
             const user = JSON.parse(localStorage.getItem('userLoggedIn'))
             this.PP = user.ProfilePicture
@@ -105,11 +110,6 @@ export default {
             })
 
         },
-        redirect() {
-            if (localStorage.getItem('userLoggedIn') === '') {
-                this.$router.replace('/groupomania/users/login')
-            }
-        }
         
     },
     mounted() {

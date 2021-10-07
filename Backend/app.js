@@ -3,6 +3,7 @@ const app = express()
 const helmet = require('helmet');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
+const commentRoute = require('./routes/commentRoute')
 const mysql = require('mysql')
 require('dotenv').config
 
@@ -29,6 +30,7 @@ const port = process.env.PORT || 3000
 //ROUTES
 app.use('/groupomania/posts', postRoute)
 app.use('/groupomania/users', userRoute)
+app.use('/groupomania/comments', commentRoute)
 
 app.listen(port, () => {
     console.log(' server Listening... ');
