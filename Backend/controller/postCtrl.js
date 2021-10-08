@@ -84,12 +84,14 @@ const getOnePost = (req, res) => {
         console.log('connected create post');
         const postdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+        const imgPost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+        console.log(req.body); 
         
         const params = {
             id_user: req.body.id_user,
             from_user: req.body.from_user,
             title: req.body.title,
-            img: req.body.img,
+            img: imgPost,
             text: req.body.text,
             date: postdate
         } //date

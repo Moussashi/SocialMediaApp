@@ -24,6 +24,7 @@
                <p>Delete Account ?</p>
                <button @click="deletePost"><fa icon="trash"/></button>
            </div>
+           
 
 </template>
 

@@ -4,12 +4,13 @@ const helmet = require('helmet');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
 const commentRoute = require('./routes/commentRoute')
+const path = require('path')
 require('dotenv').config
 
 
 //MIDDLEWARE
 app.use(express.json())
-app.use(express.static('./public'));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(helmet())
 //security middleware helmet.
 app.use((req, res, next) => {

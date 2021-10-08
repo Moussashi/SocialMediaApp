@@ -1,14 +1,16 @@
 <template>
     <the-header></the-header>
-    <form @submit.prevent="newPost">
+    <form @submit.prevent="sendPost()" enctype="multipart/form-data">
     <div class="form-control">
       <label for="title">Title</label>
       <input type="text" id="title" v-model.trim="title" />
     </div>
+
     <div class="form-control">
       <label for="img">Gif</label>
-      <input type="text" id="img" v-model.trim="img" />
+      <input @change="addImg()" type="file" ref="file" name="image"  id="File" accept=".jpg, .jpeg, .gif, .png">
     </div>
+
     <div class="form-control">
       <label for="text">text</label>
       <textarea id="text" cols="30" rows="10" v-model="text"></textarea>
@@ -24,7 +26,8 @@
  <script>
  import TheHeader from '../interface/TheHeader.vue'
  export default {
-     components: {
+
+      components: {
          TheHeader
      }, 
       data() {
@@ -37,23 +40,32 @@
          }
      },
      methods: {
+       addImg() {
+         this.img = this.$refs.file.files[0]
+         console.log(this.img);
+         console.log(this.file);
+       },
          sendPost() {
+           const formData = new FormData();
+           formData.append('image', this.img, this.img.name)
+           formData.append('id_user', this.user.id)
+           formData.append('from_user', this.user.username)
+           formData.append('title', this.title)
+           formData.append('text', this.text)
+           console.log('ttest1');
+
+           
+
             fetch("http://localhost:3000/groupomania/posts", {
                 method: "POST",
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 },
 
-                body: JSON.stringify({
-                    id_user: this.user.id,
-                    from_user: this.user.username,
-                    title: this.title,
-                    img: this.img,
-                    text: this.text,
-                })
+                body: formData
                 })
                 .then( (response) => {
+                  console.log('passé');
                     console.log(response);
                     this.$router.replace('/groupomania/posts')
                 }
@@ -126,3 +138,5 @@ textarea:focus {
     border-radius: 100%;
 }
 </style>
+
+/*You are back my nigga*********/
