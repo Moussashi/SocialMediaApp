@@ -53,7 +53,6 @@ export default {
                 for (let i = results.length - 1; i >= 0; i--) {
                     this.posts.push(results[i])
                 }
-                console.log(this.posts);
             })
 
         },

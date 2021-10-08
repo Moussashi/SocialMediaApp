@@ -1,14 +1,14 @@
 <template>
     <the-header></the-header>
     <router-link to="/groupomania/users/login">Already one of us ? Sign in</router-link>
-    <form @submit.prevent="register">
+    <form @submit.prevent="register" enctype="multipart/form-data">
     <div class="form-control">
       <label for="username">Username</label>
       <input type="text" id="usename" v-model.trim="username" />
     </div>
     <div class="form-control">
-      <label for="ProfilePicture">Profile Picture</label>
-      <input type="text" id="ProfilePicture" v-model.trim="ProfilePicture" />
+       <label for="img">Profile Picture</label>
+      <input @change="addPP()" type="file" ref="file" name="img"  id="File" accept=".jpg, .jpeg, .gif, .png">
     </div>
     <div class="form-control">
       <label for="message">Email</label>
@@ -41,6 +41,9 @@ export default {
         }
     }, 
     methods: {
+      addPP() {
+         this.ProfilePicture = this.$refs.file.files[0]
+       },
         register() {
             this.formIsValid = true;
                 if (
@@ -53,20 +56,19 @@ export default {
                     this.formIsValid = false;
                     return;
                 }
+
+              const formData = new FormData();
+                formData.append('image', this.ProfilePicture, this.ProfilePicture.name)
+                formData.append('username', this.username)
+                formData.append('email', this.email)
+                formData.append('password', this.password)
             fetch("http://localhost:3000/groupomania/users/signup", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
                 },
 
-                //make sure to serialize your JSON body
-                body: JSON.stringify({
-                    username: this.username,
-                    email: this.email,
-                    password: this.password,
-                    ProfilePicture: this.ProfilePicture
-                })
+                body: formData
                 })
                 .then( (response) => {
                     console.log(response);

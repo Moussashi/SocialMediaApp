@@ -207,7 +207,6 @@ export default {
                 }
 
                 this.users = results
-                console.log(this.users);
             })
 
         },

@@ -55,8 +55,6 @@ export default {
                     return response.json()
                 }
             ).then( (response) => {
-                console.log(response.Usertoken);
-                console.log(response.user);
                 localStorage.setItem('Token-Frontend-Login', response.Usertoken)
                 localStorage.setItem('userLoggedIn', JSON.stringify(response.user))
                 this.$router.push('/groupomania/posts')

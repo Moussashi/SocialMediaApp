@@ -42,8 +42,6 @@
      methods: {
        addImg() {
          this.img = this.$refs.file.files[0]
-         console.log(this.img);
-         console.log(this.file);
        },
          sendPost() {
            const formData = new FormData();
@@ -52,7 +50,6 @@
            formData.append('from_user', this.user.username)
            formData.append('title', this.title)
            formData.append('text', this.text)
-           console.log('ttest1');
 
            
 
@@ -65,7 +62,6 @@
                 body: formData
                 })
                 .then( (response) => {
-                  console.log('passé');
                     console.log(response);
                     this.$router.replace('/groupomania/posts')
                 }
@@ -138,5 +134,3 @@ textarea:focus {
     border-radius: 100%;
 }
 </style>
-
-/*You are back my nigga*********/

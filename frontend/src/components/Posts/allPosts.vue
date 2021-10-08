@@ -77,7 +77,6 @@ export default {
 
         },
         async loadComments() {
-            console.log('loading comments');
 
             const myHeaders = new Headers();
             const token = localStorage.getItem('Token-Frontend-Login')

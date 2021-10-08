@@ -15,7 +15,6 @@ const pool = mysql.createPool({
 const getComments = async (req, res) => {
      pool.getConnection( async (err, connection) => {
         if (err) throw err
-        console.log('connected');
 
         //query
         connection.query('SELECT * from comments', (err, rows) => {
@@ -40,7 +39,6 @@ const getOneComment = (req, res) => {
 
     pool.getConnection((err, connection) => {
         if (err) throw err
-        console.log('connected');
 
         //query
         connection.query(`
@@ -61,7 +59,6 @@ const getOneComment = (req, res) => {
 
      pool.getConnection((err, connection) => {
         if (err) throw err
-        console.log('connected delete comment');
 
         connection.query('DELETE from comments WHERE id = ?', [req.params.id], (err, rows) => {
             connection.release() // return the connection pool
@@ -81,7 +78,6 @@ const getOneComment = (req, res) => {
   const createComment = (req, res) => {
 
     pool.getConnection((err, connection) => {
-        console.log('connected create comment');
         const commentdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         
@@ -91,8 +87,6 @@ const getOneComment = (req, res) => {
             text: req.body.text,
             date_comment: commentdate
         } //date
-
-        console.log(params);
 
         //query
         connection.query('INSERT INTO comments SET ?', params , (err, rows) => {

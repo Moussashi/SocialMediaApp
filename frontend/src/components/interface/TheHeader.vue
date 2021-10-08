@@ -3,7 +3,7 @@
         <img src="../../assets/groupo.png">
         <ul>
             <router-link to="/groupomania/posts">Posts</router-link>
-            <router-link to="/groupomania/users/:id"> <fa icon="user"/></router-link>
+            <router-link to="/groupomania/users/:id"> Profil <fa icon="user"/></router-link>
         </ul>
     </header>
 </template>

@@ -15,7 +15,6 @@ const pool = mysql.createPool({
 const getPosts = async (req, res) => {
      pool.getConnection( async (err, connection) => {
         if (err) throw err
-        console.log('connected');
         //query
         connection.query('SELECT * from posts', (err, rows) => {
             connection.release() // return the connection pool
@@ -39,7 +38,6 @@ const getOnePost = (req, res) => {
 
     pool.getConnection((err, connection) => {
         if (err) throw err
-        console.log('connected');
 
         //query
         connection.query('SELECT * from posts WHERE id = ?', [req.params.id], (err, rows) => {
@@ -59,7 +57,6 @@ const getOnePost = (req, res) => {
 
      pool.getConnection((err, connection) => {
         if (err) throw err
-        console.log('connected');
 
         //query
         connection.query('DELETE from posts WHERE id = ?', [req.params.id], (err, rows) => {
@@ -81,11 +78,9 @@ const getOnePost = (req, res) => {
  const createPost = (req, res) => {
 
     pool.getConnection((err, connection) => {
-        console.log('connected create post');
         const postdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         const imgPost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-        console.log(req.body); 
         
         const params = {
             id_user: req.body.id_user,
@@ -94,9 +89,7 @@ const getOnePost = (req, res) => {
             img: imgPost,
             text: req.body.text,
             date: postdate
-        } //date
-
-        console.log(params);
+        } 
 
         //query
         connection.query('INSERT INTO posts SET ?', params , (err, rows) => {
