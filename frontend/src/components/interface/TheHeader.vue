@@ -1,9 +1,10 @@
 <template>
     <header>
-        <img src="../../assets/groupo.png">
+        <img src="../../assets/Vi-Motiv.png">
         <ul>
             <router-link to="/groupomania/posts">Posts</router-link>
-            <router-link to="/groupomania/users/:id"> Profil <fa icon="user"/></router-link>
+            <router-link id="news" to="/groupomania/news">News</router-link>
+            <router-link id="profil" to="/groupomania/users/:id">Profil</router-link>
         </ul>
     </header>
 </template>
@@ -14,22 +15,21 @@
     padding: 0;
 }
 header {
-    height: 15%;
-    background-color: rgb(231, 231, 231);
+    margin: 0;
+    width: 100%;
+    height: 7%;
+    background-color: rgb(255, 255, 255);
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 header ul {
-    width: 20%;
     display: flex;
     justify-content: space-around;
+    margin-right: 2%;
 }
-header a {
-    width: 30%;
-}
+
 a {
-    background-color: tomato;
+    font-size: 110%;
     color: rgb(70, 70, 95);
     padding: 5%;
     border-radius: 15%;
@@ -38,8 +38,10 @@ a:hover {
         background-color: rgb(247, 57, 57);
 }
 img {
-    width: 30%;
-    height: 15%;
+    width: 25%;
+    padding: 0;
+    margin: 0;
+
 }
 .fa {
     font-size: 1.5rem;

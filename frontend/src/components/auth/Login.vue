@@ -69,7 +69,7 @@ export default {
 
 form {
   margin: 1rem;
-  border: 2px solid #ccc;
+  border: 2px solid tomato;
   border-radius: 12px;
   padding: 1rem;
   width: 50%;
@@ -98,8 +98,8 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #3d008d;
-  background-color: #faf6ff;
+  border-color: tomato;
+  background-color: rgba(255, 99, 71, 0.342);
   outline: none;
 }
 

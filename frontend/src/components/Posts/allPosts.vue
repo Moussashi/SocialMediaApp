@@ -1,6 +1,6 @@
 <template>
 <the-header></the-header>
-    <h1>HomePage</h1>
+    <h1>Latest Posts</h1>
     <ul>
         <post
             v-for="po in posts"
@@ -125,7 +125,7 @@ export default {
     bottom: 1%;
     left: 1%;
     color: white;
-    background: tomato;
+    background: silver;
     padding: 1%;
     border-radius: 15%;
 }
@@ -138,5 +138,8 @@ export default {
     background: rgb(107, 107, 109);
     padding: 1%;
     border-radius: 15%;
+} 
+h1 {
+    color: silver;
 }
 </style>
