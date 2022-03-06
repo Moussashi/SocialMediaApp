@@ -54,7 +54,7 @@ export default {
         },
         userInfo() {
             const user = JSON.parse(localStorage.getItem('userLoggedIn'))
-            this.PP = user.ProfilePicture
+            this.PP = user.profilePicture
             this.username = user.username
             this.id = user.id
         },

@@ -8,7 +8,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: null,
-    database: 'p7'
+    database: 'groupomania'
 })
 
 
@@ -16,6 +16,7 @@ const pool = mysql.createPool({
  * *********************  SIGNUP  *****************************
  ************************************************************/
 const addUser = async (req, res) => {
+    console.log('hit addUser');
 
     const password = req.body.password
     const salt = await bcrypt.genSalt(10);
@@ -25,14 +26,16 @@ const addUser = async (req, res) => {
         "username": req.body.username,
         "email": req.body.email,
         "password": hashedPassword,
-        "ProfilePicture": imgPP
+        "profilePicture": imgPP
     }
 
-    connection.query('INSERT INTO user SET ?', user, function (err, results) {
+    connection.query('INSERT INTO users SET ?', user, function (err, results) {
         if (err) {
+            console.log('problem to insert');
             res.json({
                 status: false,
                 message: 'there is a problem with query'
+                
             })
         } else {
             res.json({
@@ -50,7 +53,7 @@ const LogUser = async (req, res) => {
    const password = req.body.password
    
 
-   connection.query( 'SELECT * FROM user WHERE email = ?', [email], async function (err, results) {
+   connection.query( 'SELECT * FROM users WHERE email = ?', [email], async function (err, results) {
        const user = results[0]
        const validPassword = await bcrypt.compare(password, user.password);
        if (err) {
@@ -60,7 +63,7 @@ const LogUser = async (req, res) => {
             })
        } else {
            if (results.length > 0 && validPassword) {   
-               const Usertoken = jwt.sign({_id: user._id, email: user.email, username: user.username, ProfilePicture: user.ProfilePicture}, 'katanagatari', {expiresIn: '1h'})
+               const Usertoken = jwt.sign({_id: user._id, email: user.email, username: user.username, profilePicture: user.profilePicture}, 'katanagatari', {expiresIn: '1h'})
                res.json({
                    Usertoken: Usertoken,
                    status: true,
@@ -69,7 +72,7 @@ const LogUser = async (req, res) => {
                        id: user.id,
                        email: user.email,
                        username: user.username,
-                       ProfilePicture: user.ProfilePicture
+                       profilePicture: user.profilePicture
                    }
                })
                
@@ -88,7 +91,7 @@ const getAllUsers = async (req, res) => {
     pool.getConnection( async (err, connection) => {
         if (err) throw err
         //query
-        connection.query('SELECT * from user', (err, rows) => {
+        connection.query('SELECT * from users', (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
@@ -109,7 +112,7 @@ const getAllUsers = async (req, res) => {
         if (err) throw err
 
         //query
-        connection.query('DELETE from user WHERE id = ?', [req.body.id], (err, rows) => {
+        connection.query('DELETE from users WHERE id = ?', [req.body.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {

@@ -8,7 +8,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: null,
-    database: 'p7'
+    database: 'groupomania'
 })
 
 // GET ALL POSTS

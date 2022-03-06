@@ -36,20 +36,20 @@ export default {
             username: '',
             email: '',
             password: '',
-            ProfilePicture: '',
+            profilePicture: '',
             formIsValid: true
         }
     }, 
     methods: {
       addPP() {
-         this.ProfilePicture = this.$refs.file.files[0]
+         this.profilePicture = this.$refs.file.files[0]
        },
         register() {
             this.formIsValid = true;
                 if (
                     this.email === '' ||
                     this.username === '' ||
-                    this.ProfilePicture === '' ||
+                    this.profilePicture === '' ||
                     !this.email.includes('@') ||
                     this.password === ''
                 ) {
@@ -58,7 +58,7 @@ export default {
                 }
 
               const formData = new FormData();
-                formData.append('image', this.ProfilePicture, this.ProfilePicture.name)
+                formData.append('image', this.profilePicture, this.profilePicture.name)
                 formData.append('username', this.username)
                 formData.append('email', this.email)
                 formData.append('password', this.password)

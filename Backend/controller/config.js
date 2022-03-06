@@ -5,11 +5,11 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: null,
-    database: 'p7'
+    database: 'groupomania'
 })
 connection.connect(function(err) {
     if (!err) {
-        console.log('connection');
+        console.log('connection to database');
     } else {
         console.log('connection failed');
     }
