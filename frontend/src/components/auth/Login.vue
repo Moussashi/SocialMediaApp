@@ -1,20 +1,22 @@
 <template>
     <the-header></the-header>
+    <div id="wrapper">
         <router-link to="/groupomania/users/signup">No account yet ? Join Us</router-link>
-    <form @submit.prevent="register">
-        <div class="form-control">
-            <label for="message">Email</label>
-            <input type="email" id="email" v-model.trim="email" />
-        </div>
-        <div class="form-control">
-            <label for="password">Password</label>
-            <input type="text" id="password" v-model.trim="password" />
-        </div>
-        <p class="errors" v-if="!formIsValid">Please enter a valid email and password.</p>
-        <div class="actions">
-            <button>Login</button>
-        </div>
-    </form>
+        <form @submit.prevent="register">
+            <div class="form-control">
+                <label for="message">Email</label>
+                <input type="email" id="email" v-model.trim="email" />
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="text" id="password" v-model.trim="password" />
+            </div>
+            <p class="errors" v-if="!formIsValid">Please enter a valid email and password.</p>
+            <div class="actions">
+                <button>Login</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -67,14 +69,23 @@ export default {
 
 <style scoped>
 
+#wrapper {
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 form {
   margin: 1rem;
-  border: 2px solid tomato;
   border-radius: 12px;
   padding: 1rem;
   width: 50%;
-  margin: auto;
   margin-top: 2%;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 
 .form-control {

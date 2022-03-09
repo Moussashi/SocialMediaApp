@@ -1,5 +1,13 @@
 <template>
-  <router-view></router-view>
+  <div class="content">
+      <router-view v-slot="{ Component, route }">
+          <transition name="fade" mode="out-in">
+            <div :key="route.fullPath">
+              <component :is="Component" />
+            </div>
+          </transition>
+      </router-view>
+  </div>
 </template>
 
 <script>
@@ -42,13 +50,28 @@ export default {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Courier New', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin-top: 60px;
   margin: 0;
   padding: 0;
-  background-color: rgb(236, 236, 236);
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateX(100px);
+}
+.fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.fade-leave-active {
+  transition: all 0.3s ease-in;
 }
 </style>

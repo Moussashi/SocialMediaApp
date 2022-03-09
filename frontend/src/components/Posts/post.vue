@@ -169,6 +169,7 @@ export default {
                 }
             }).then((data) => {
                 const results = [];
+                console.log(data)
                 for (const id in data) {
                     results.push({
                         id: data[id].id,

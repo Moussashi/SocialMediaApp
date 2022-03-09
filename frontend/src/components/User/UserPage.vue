@@ -78,7 +78,7 @@ export default {
                         id: id, 
                         username: data[id].from_user, 
                         title: data[id].title,
-                        date: data[id].date,
+                        date: data[id].date.slice(0, 19).replace('T', ' '),
                         text: data[id].text,
                         img: data[id].img})
                 }

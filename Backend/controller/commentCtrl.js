@@ -39,16 +39,18 @@ const getOneComment = (req, res) => {
 
     pool.getConnection((err, connection) => {
         if (err) throw err
+        console.log('hit getOne comment');
 
         //query
-        connection.query(`
-            SELECT DISTINCT c.id, c.text, c.date_comment, c.id_user, u.username from comments c , user u INNER JOIN user WHERE c.id_post = ? AND u.id = c.id_user`, [req.params.id], (err, rows) => {
+        connection.query('SELECT * from comments WHERE id_post = ?', [req.params.id], (err, rows) => {
             connection.release() // return the connection pool
 
             if (!err) {
+                console.log(rows)
                 res.send(rows)
             } else {
-                res.send(err)
+                console.log('query error');
+                throw err
             }
         })
     })
